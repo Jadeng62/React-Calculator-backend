@@ -1,4 +1,4 @@
--- db/seed.sql
+
 \c jwt_auth
 
 INSERT INTO users (username, password_hash, email, created_at, updated_at)
