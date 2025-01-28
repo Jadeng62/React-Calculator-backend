@@ -27,7 +27,14 @@ const createUser = async ({ username, passwordHash, email }) => {
   return newUser;
 };
 
+const getAllUsers = async () => {
+  const query = `SELECT * FROM users;`;
+  const allUsers = await db.any(query)
+  return allUsers
+}
+
 module.exports = {
   findUserByUsername,
   createUser,
+  getAllUsers,
 };

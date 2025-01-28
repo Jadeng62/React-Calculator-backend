@@ -1,17 +1,26 @@
 -- db/schema.sql
-DROP DATABASE IF EXISTS jwt_auth;
+DROP DATABASE IF EXISTS calculator_app;
 
-CREATE DATABASE jwt_auth;
+CREATE DATABASE calculator_app;
 
 
-\c jwt_auth
-
+\c calculator_app
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS calculations;
+CREATE TABLE calculations (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE DEFAULT 1,
+    calculation TEXT NOT NULL,
+    result TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
