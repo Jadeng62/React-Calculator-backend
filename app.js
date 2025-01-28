@@ -5,6 +5,8 @@ const cron = require('node-cron')
 const cookieParser = require('cookie-parser')
 
 const authController = require('./controllers/authController')
+const calculationsController = require('./controllers/calculationsController')
+const userController = require("./controllers/userController")
 
 // CONFIGURATION
 const app = express()
@@ -20,11 +22,15 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/api/auth', authController)
+app.use('/api/users', userController)
+app.use('/api/history', calculationsController)
 
 // ROUTES
 app.get('/', (_req, res) => {
   res.send('Welcome to JWT Auth!')
 })
+
+
 
 // 404 PAGE
 app.get('*', (_req, res) => {
